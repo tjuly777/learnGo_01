@@ -1,12 +1,14 @@
 package main
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestAppName(t *testing.T) {
-	expect := "Learning Golang now!"
-	actual := AppName()
+	expect := 7
+	actual := AppName(0, 7)
 
 	if expect != actual {
-		t.Errorf("%s != %s", expect, actual)
+		t.Errorf("%v != %v", expect, actual)
 	}
 }

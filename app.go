@@ -1,5 +1,9 @@
 package main
 
-func AppName() string {
-	return "Learning Golang now!"
+func AppName(x, y int) int {
+	return getAppName(x, y)
+}
+
+func getAppName(x, y int) int {
+	return x + y
 }
