@@ -38,11 +38,12 @@ func getMultiReturn(a, b int) (int, int) {
 }
 
 //エラーを返す
-func getSomeError() (bool, interface{}) {
-	var (
-		res bool
-		err interface{}
-	)
+func getSomeError() (res bool, err interface{}) {
+	//戻り値で変数初期化まで行っているので、下記は省略可！
+	//var (
+	//	res bool
+	//	err interface{}
+	//)
 	err = "Not nil" //interface{}型の初期値、nilではなくなったことでエラーを表す
 	return res, err
 }
