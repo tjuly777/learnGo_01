@@ -8,8 +8,11 @@ import (
 func main() {
 	fmt.Println(AppName(2, 5))
 
-	q, r := getMultiReturn(7, 3)
-	fmt.Printf("Quotient = %v, Remainder = %v\n", q, r)
+	q1, r1 := getMultiReturn(7, 3)
+	fmt.Printf("Quotient = %v, Remainder = %v\n", q1, r1)
+
+	q2, _ := getMultiReturn(7, 3) //_を使えば、返り値の一部を破棄できる
+	fmt.Printf("Quotient = %v, Remainder = null\n", q2)
 
 	fmt.Println(animals.ElephantFeed())
 	fmt.Println(animals.MonkeyFeed())
