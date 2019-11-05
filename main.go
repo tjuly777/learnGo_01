@@ -2,6 +2,7 @@ package main
 
 import (
 	"./animals"
+	"errors"
 	"fmt"
 )
 
@@ -28,6 +29,7 @@ func main() {
 	if err != nil {
 		fmt.Printf("Result == %v. Error Cause '%v'", result, err)
 	}
+
 }
 
 //複数の戻り値を返す関数
@@ -44,6 +46,6 @@ func getSomeError() (res bool, err interface{}) {
 	//	res bool
 	//	err interface{}
 	//)
-	err = "Not nil" //interface{}型の初期値、nilではなくなったことでエラーを表す
+	err = errors.New("This is error.") //interface{}型の初期値、nilではなくなったことでエラーを表す
 	return res, err
 }
