@@ -27,8 +27,44 @@ func main() {
 	*/
 	result, err := getSomeError()
 	if err != nil {
-		fmt.Printf("Result == %v. Error Cause '%v'", result, err)
+		fmt.Printf("Result == %v. Error Cause '%v'\n", result, err)
 	}
+
+	//変数に無名関数を代入することも可能。
+	f := func(x, y int) int { return x + y }
+	fmt.Println(f(1, 11))
+
+	//関数を返す関数
+	f2 := returnFunc()
+	f2()
+	//変数を経由せずに直接呼び出すことも可能。
+	returnFunc()()
+
+	//関数を引数としてとる。ここでは、無名関数を引数として与えている。
+	callFunction(func() {
+		fmt.Println("Called Function.")
+	})
+
+	//クロージャから関数内のローカル変数にアクセスした際の挙動確認
+	f4 := later()
+	fmt.Println(f4("It"))
+	fmt.Println(f4("is"))
+	fmt.Println(f4("Closure Lesson."))
+
+	//上記を応用した、ジェネレータ
+	f5 := incrementFunc()
+	fmt.Println(f5())
+	fmt.Println(f5())
+	fmt.Println(f5())
+	fmt.Println(f5())
+
+	/**
+	新たにクロージャを生成すると、値は別個となる。
+	オブジェクトのインスタンス化に近いイメージ！
+	*/
+	f5_1 := incrementFunc()
+	fmt.Println(f5_1())
+	fmt.Println(f5())
 
 }
 
@@ -48,4 +84,44 @@ func getSomeError() (res bool, err interface{}) {
 	//)
 	err = errors.New("This is error.") //interface{}型の初期値、nilではなくなったことでエラーを表す
 	return res, err
+}
+
+//無名関数を返す関数
+func returnFunc() func() {
+	return func() {
+		fmt.Println("I'm a function.")
+	}
+}
+
+//関数を引数に取る関数
+func callFunction(f func()) {
+	f()
+}
+
+//無名関数を返す関数
+func later() func(string) string {
+	/**
+	later()中のローカル関数。通常は関数実行後に破棄されるが、
+	クロージャからの参照があった場合は破棄されない。
+	*/
+	var store string
+
+	//later()実行時に返却されるクロージャ。
+	return func(next string) string {
+		//呼び出されたタイミングで、前回呼び出した際に保存した引数を返却用変数に代入。
+		s := store
+		//引数をlater()のローカル変数に保存。
+		store = next
+		return s
+	}
+}
+
+//クロージャを応用したジェネレータの習作
+func incrementFunc() func() int {
+	i := 0
+
+	return func() int {
+		i++
+		return i
+	}
 }
