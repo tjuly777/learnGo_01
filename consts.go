@@ -34,6 +34,6 @@ func constFunc() (int, int) {
 
 func main() {
 	x, y := constFunc()
-	fmt.Printf("x=%v y=%v", x, y)
-	fmt.Printf("IO1=%v IO2=%v IO3=%v", IO1, IO2, IO3)
+	fmt.Printf("x=%v y=%v \n", x, y)
+	fmt.Printf("IO1=%v IO2=%v IO3=%v \n", IO1, IO2, IO3)
 }
