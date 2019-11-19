@@ -7,6 +7,9 @@ package main
 import "fmt"
 
 func main() {
+	//range・goto
+	forByRange()
+
 	//型アサーション
 	getAssertion(10)
 	getAssertionWithSwitch("String")
@@ -14,6 +17,23 @@ func main() {
 	//ラベル
 	//defer
 	//goroutin
+}
+
+/**
+rangeを用いたfor文。
+配列・文字列など、既存の複数要素のあるデータ型をループする。
+PHPのforeachと似た使用感。
+*/
+func forByRange() {
+	x := [5]string{"A", "B", "C", "D", "E"}
+	for i, v := range x {
+		if i > 2 {
+			//ラベルを用いたgotoでループを抜ける。（※gotoの実践なので、本来の用途ならbreakを使うべき）
+			goto Coda
+		}
+		fmt.Printf("forByRange: [%v] => %v \n", i, v)
+	}
+Coda:
 }
 
 /**
