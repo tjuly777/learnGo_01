@@ -88,3 +88,21 @@ func runDefer() {
 	fmt.Println("runDefer:1st")
 	fmt.Println("runDefer:2nd")
 }
+
+/**
+並行処理、go文の実践。
+*/
+func runGoRoutine() {
+	go goSub()
+	go func() {
+		for x := 1; x < 5; x++ {
+			fmt.Printf("runGoRoutine:Main Loop. value=%v \n", x)
+		}
+	}()
+}
+
+func goSub() {
+	for x := 1; x < 5; x++ {
+		fmt.Printf("runGoRoutine:Sub loop. value=%v \n", x)
+	}
+}
