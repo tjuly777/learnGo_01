@@ -9,7 +9,18 @@ import (
 	"time"
 )
 
+var (
+	y int = 15
+)
+
+func init() {
+	y *= 2
+}
+
 func main() {
+	//mainよりも優先して実行されるinitにより、パッケージ変数のyの値は変化
+	fmt.Printf("By func init: y = %v\n", y)
+
 	//range・goto
 	forByRange()
 
