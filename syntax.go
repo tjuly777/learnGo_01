@@ -4,7 +4,10 @@
 */
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 func main() {
 	//range・goto
@@ -17,7 +20,9 @@ func main() {
 	//defer
 	runDefer()
 
-	//goroutin
+	//goroutine
+	runGoRoutine()
+	time.Sleep(3 * time.Second) //並行処理の実行前にmainが終了してしまうとgoも実行されない
 }
 
 /**
@@ -76,7 +81,7 @@ func runDefer() {
 	defer fmt.Println("runDefer:Last")
 	defer func() {
 		x := [5]int{}
-		for i, _ := range x {
+		for i := range x {
 			fmt.Printf("runDefer: %v\n", i)
 		}
 	}()
