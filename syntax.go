@@ -14,8 +14,9 @@ func main() {
 	getAssertion(10)
 	getAssertionWithSwitch("String")
 
-	//ラベル
 	//defer
+	runDefer()
+
 	//goroutin
 }
 
@@ -65,4 +66,20 @@ func getAssertionWithSwitch(a interface{}) {
 	default:
 		fmt.Println("Assertion with Switch: a is the Other type.")
 	}
+}
+
+/**
+関数終了時に実行されるdeferの実践。
+deferは登録順ではなく、最後に登録されたものから実行されていくことに注意。
+*/
+func runDefer() {
+	defer fmt.Println("runDefer:Last")
+	defer func() {
+		x := [5]int{}
+		for i, _ := range x {
+			fmt.Printf("runDefer: %v\n", i)
+		}
+	}()
+	fmt.Println("runDefer:1st")
+	fmt.Println("runDefer:2nd")
 }
